@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">UdemyAndroidKotlin</string>
+
+
+    <string name="ex_no_exception">İnternet bağlantınızı kontrol edeniz.</string>
+    <string name="ex_common_error">Bir sorun meydana geldi. Lütfen daha sonra tekrar deneyiniz.</string>
 </resources>

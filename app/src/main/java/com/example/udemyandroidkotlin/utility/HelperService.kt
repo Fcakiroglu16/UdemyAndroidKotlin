@@ -1,6 +1,8 @@
 package com.example.udemyandroidkotlin.utility
 
 import android.content.Context
+import com.example.udemyandroidkotlin.Exceptions.OfflineException
+import com.example.udemyandroidkotlin.R
 import com.example.udemyandroidkotlin.models.ApiError
 import com.example.udemyandroidkotlin.models.ApiResponse
 import com.example.udemyandroidkotlin.models.TokenAPI
@@ -11,6 +13,46 @@ class HelperService {
 
 
     companion object {
+
+        fun <T> handleException(ex: Exception): ApiResponse<T> {
+            return when (ex) {
+
+                is OfflineException -> {
+
+                    val exmessage =
+                        arrayListOf(GlobalApp.getAppContext().resources.getString(R.string.ex_no_exception))
+                    var apiError = ApiError(exmessage, 500, true)
+
+                    ApiResponse(false, fail = apiError)
+
+
+                }
+
+                is Exception -> {
+                    val exmessage =
+                        arrayListOf(GlobalApp.getAppContext().resources.getString(R.string.ex_common_error))
+                    var apiError = ApiError(exmessage, 500, true)
+
+                    ApiResponse(false, fail = apiError)
+
+
+                }
+                else -> {
+                    val exmessage =
+                        arrayListOf(GlobalApp.getAppContext().resources.getString(R.string.ex_common_error))
+                    var apiError = ApiError(exmessage, 500, true)
+
+                    ApiResponse(false, fail = apiError)
+
+                }
+
+
+            }
+
+
+        }
+
+
         fun saveTokenSharedPreference(token: TokenAPI) {
 
             var preference =

@@ -9,6 +9,7 @@ import com.example.udemyandroidkotlin.models.UserSignUp
 import com.example.udemyandroidkotlin.retrofitServices.ApiClient
 import com.example.udemyandroidkotlin.retrofitServices.RetrofitLoginService
 import com.example.udemyandroidkotlin.utility.HelperService
+import java.lang.Exception
 
 class LoginService {
 
@@ -18,46 +19,60 @@ class LoginService {
 
 
         suspend fun signUp(userSignUp: UserSignUp): ApiResponse<Unit> {
-            var tokenResponse = TokenService.getTokenWithClientCredentials();
-
-            if (!tokenResponse.isSuccessful) return ApiResponse(false)
 
 
-            var token = tokenResponse.success!!
+            try {
+                var tokenResponse = TokenService.getTokenWithClientCredentials();
 
-            var signUpResponse = retrofitTokenServiceWithoutInterceptor.signUp(
-                userSignUp,
-                "bearer ${token.AccessToken} "
-            )
+                if (!tokenResponse.isSuccessful) return ApiResponse(false)
 
 
-            if (!signUpResponse.isSuccessful) return HelperService.handleApiError(signUpResponse)
+                var token = tokenResponse.success!!
+
+                var signUpResponse = retrofitTokenServiceWithoutInterceptor.signUp(
+                    userSignUp,
+                    "bearer ${token.AccessToken} "
+                )
 
 
-            return ApiResponse(true)
+                if (!signUpResponse.isSuccessful) return HelperService.handleApiError(signUpResponse)
+
+
+                return ApiResponse(true)
+            } catch (ex: Exception) {
+                return HelperService.handleException(ex)
+            }
 
 
         }
 
         suspend fun signIn(userSignIn: UserSignIn): ApiResponse<Unit> {
 
-
-            var response = retrofitTokenServiceWithoutInterceptor.signIn(
-                BuildConfig.ClientId_ROP,
-                BuildConfig.Client_Secret_ROP,
-                ApiConsts.resourceOwnerPasswordCredentialGrantType,
-                userSignIn.Email,
-                userSignIn.Password
-            )
-
-            if (!response.isSuccessful) return HelperService.handleApiError(response)
+            try {
+                var response = retrofitTokenServiceWithoutInterceptor.signIn(
+                    BuildConfig.ClientId_ROP,
+                    BuildConfig.Client_Secret_ROP,
+                    ApiConsts.resourceOwnerPasswordCredentialGrantType,
+                    userSignIn.Email,
+                    userSignIn.Password
+                )
 
 
-            var token = response.body() as TokenAPI
 
-            HelperService.saveTokenSharedPreference(token)
 
-            return ApiResponse(true)
+
+                if (!response.isSuccessful) return HelperService.handleApiError(response)
+
+
+                var token = response.body() as TokenAPI
+
+                HelperService.saveTokenSharedPreference(token)
+
+                return ApiResponse(true)
+            } catch (ex: Exception) {
+                return HelperService.handleException(ex)
+            }
+
 
         }
 
