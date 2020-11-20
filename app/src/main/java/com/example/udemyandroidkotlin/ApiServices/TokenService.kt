@@ -1,13 +1,11 @@
 package com.example.udemyandroidkotlin.ApiServices
 
 import android.content.Context
-import android.net.Credentials
 import com.example.udemyandroidkotlin.BuildConfig
 import com.example.udemyandroidkotlin.consts.ApiConsts
-import com.example.udemyandroidkotlin.models.ApiError
 import com.example.udemyandroidkotlin.models.ApiResponse
 import com.example.udemyandroidkotlin.models.Introspec
-import com.example.udemyandroidkotlin.models.Token
+import com.example.udemyandroidkotlin.models.TokenAPI
 import com.example.udemyandroidkotlin.retrofitServices.ApiClient
 import com.example.udemyandroidkotlin.retrofitServices.RetrofitTokenService
 import com.example.udemyandroidkotlin.utility.GlobalApp
@@ -21,7 +19,7 @@ class TokenService {
             ApiClient.buildService(ApiConsts.authBaseUrl, RetrofitTokenService::class.java, false)
 
 
-        suspend fun getTokenWithClientCredentials(): ApiResponse<Token> {
+        suspend fun getTokenWithClientCredentials(): ApiResponse<TokenAPI> {
 
             var response = retrofitTokenServiceWithoutInterceptor.getTokenWithClientCredentials(
                 BuildConfig.ClientId_CC,
@@ -32,12 +30,12 @@ class TokenService {
 ///Helper method yaz basarısız olan durumlar için
             if (!response.isSuccessful) return ApiResponse(false)
 
-            return ApiResponse(true, response.body() as Token)
+            return ApiResponse(true, response.body() as TokenAPI)
 
 
         }
 
-        fun refreshToken(refreshToken: String): ApiResponse<Token> {
+        fun refreshToken(refreshToken: String): ApiResponse<TokenAPI> {
 
             var response = retrofitTokenServiceWithoutInterceptor.refreshToken(
                 BuildConfig.ClientId_ROP,
@@ -47,7 +45,7 @@ class TokenService {
             ).execute();
 
             return if (response.isSuccessful) {
-                ApiResponse(true, response.body() as Token)
+                ApiResponse(true, response.body() as TokenAPI)
             } else {
                 ApiResponse(false)
             }
@@ -65,7 +63,7 @@ class TokenService {
                 preference.getString("token", null) ?: return ApiResponse(false);
 
 
-            var token: Token = Gson().fromJson(tokenString, Token::class.java)
+            var token: TokenAPI = Gson().fromJson(tokenString, TokenAPI::class.java)
 
             var authorization: String =
                 okhttp3.Credentials.basic("resource_product_api", "apisecret")

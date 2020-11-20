@@ -1,8 +1,7 @@
 package com.example.udemyandroidkotlin.retrofitServices
 
-import android.media.session.MediaSession
 import com.example.udemyandroidkotlin.models.Introspec
-import com.example.udemyandroidkotlin.models.Token
+import com.example.udemyandroidkotlin.models.TokenAPI
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.Field
@@ -18,7 +17,7 @@ interface RetrofitTokenService {
         @Field("client_id") clientId: String,
         @Field("client_secret") clientSecret: String,
         @Field("grant_type") grantType: String
-    ): Response<Token>
+    ): Response<TokenAPI>
 
     @FormUrlEncoded
     @POST("connect/token")
@@ -34,7 +33,7 @@ interface RetrofitTokenService {
         @Field("client_secret") clientSecret:String,
         @Field("grant_type") grantType: String,
         @Field("refresh_token") refreshToken:String
-    ): Call<Token>
+    ): Call<TokenAPI>
 
 
 

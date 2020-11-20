@@ -1,6 +1,6 @@
 package com.example.udemyandroidkotlin.retrofitServices
 
-import com.example.udemyandroidkotlin.models.Token
+import com.example.udemyandroidkotlin.models.TokenAPI
 import com.example.udemyandroidkotlin.models.UserSignUp
 import okhttp3.ResponseBody
 import retrofit2.Response
@@ -24,7 +24,7 @@ interface RetrofitLoginService {
         @Field("username") userName: String,
         @Field("password") password: String
 
-    ):Response<Token>
+    ):Response<TokenAPI>
 
 
 }

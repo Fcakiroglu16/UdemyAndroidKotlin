@@ -2,7 +2,7 @@ package com.example.udemyandroidkotlin.models
 
 import com.google.gson.annotations.SerializedName
 
-data class Token(
+data class TokenAPI(
     @SerializedName("access_token") var AccessToken: String,
     @SerializedName("expires_in") var Expires: Int,
     @SerializedName("token_type") var TokenType: String,

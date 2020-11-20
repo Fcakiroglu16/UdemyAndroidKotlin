@@ -3,12 +3,12 @@ package com.example.udemyandroidkotlin.ApiServices
 import com.example.udemyandroidkotlin.BuildConfig
 import com.example.udemyandroidkotlin.consts.ApiConsts
 import com.example.udemyandroidkotlin.models.ApiResponse
-import com.example.udemyandroidkotlin.models.Token
+import com.example.udemyandroidkotlin.models.TokenAPI
 import com.example.udemyandroidkotlin.models.UserSignIn
 import com.example.udemyandroidkotlin.models.UserSignUp
 import com.example.udemyandroidkotlin.retrofitServices.ApiClient
 import com.example.udemyandroidkotlin.retrofitServices.RetrofitLoginService
-import com.example.udemyandroidkotlin.retrofitServices.RetrofitTokenService
+import com.example.udemyandroidkotlin.utility.HelperService
 
 class LoginService {
 
@@ -31,7 +31,7 @@ class LoginService {
             )
 
 
-            if (!signUpResponse.isSuccessful) return ApiResponse(false)
+            if (!signUpResponse.isSuccessful) return HelperService.handleApiError(signUpResponse)
 
 
             return ApiResponse(true)
@@ -50,12 +50,12 @@ class LoginService {
                 userSignIn.Password
             )
 
-            if (!response.isSuccessful) return ApiResponse(false);
+            if (!response.isSuccessful) return HelperService.handleApiError(response)
 
 
-            var token = response.body() as Token
+            var token = response.body() as TokenAPI
 
-            //sharedPreference kaydedilecek
+            HelperService.saveTokenSharedPreference(token)
 
             return ApiResponse(true)
 
