@@ -21,8 +21,8 @@ class LaunchActivityViewModel : ViewModel(), IViewModelState {
 
         viewModelScope.launch {
 
-            var response = TokenService.checkToken()
 
+            var response = TokenService.checkToken()
             status.value = response.isSuccessful
 
             loadingSate.value = LoadingState.Loaded
