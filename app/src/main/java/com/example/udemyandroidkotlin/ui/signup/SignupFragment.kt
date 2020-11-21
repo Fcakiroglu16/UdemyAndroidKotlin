@@ -1,5 +1,7 @@
 package com.example.udemyandroidkotlin.ui.signup
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,8 +11,13 @@ import android.view.ViewGroup
 import androidx.viewpager2.widget.ViewPager2
 import com.example.udemyandroidkotlin.R
 import com.example.udemyandroidkotlin.models.UserSignUp
+import com.example.udemyandroidkotlin.utility.LoadingState
 import kotlinx.android.synthetic.main.signup_fragment.*
 import kotlinx.android.synthetic.main.signup_fragment.view.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class SignupFragment : Fragment() {
 
@@ -29,7 +36,19 @@ class SignupFragment : Fragment() {
         var fragmentView = inflater.inflate(R.layout.signup_fragment, container, false)
         var viewPagerLogin = requireActivity().findViewById<ViewPager2>(R.id.ViewPagerLogin)
 
-        fragmentView.btn_signin.setOnClickListener {
+
+
+        viewModel.loadingSate.observe(viewLifecycleOwner, {
+
+            when (it) {
+                LoadingState.Loading -> fragmentView.btn_signup.startAnimation()
+                LoadingState.Loaded -> fragmentView.btn_signup.revertAnimation()
+            }
+
+        })
+
+
+        fragmentView.btn_signup.setOnClickListener {
 
             var userSignUp = UserSignUp(
                 text_signup_username.editText?.text.toString(),
@@ -43,7 +62,16 @@ class SignupFragment : Fragment() {
 
                 if (it) {
 
-                    viewPagerLogin.currentItem=0
+                    viewPagerLogin.currentItem = 0
+
+                    CoroutineScope(Dispatchers.Main).launch {
+
+                        delay(1000)
+                        onAlertDailog(fragmentView)
+                    }
+
+
+
 
                 } else {
                     //hata var
@@ -62,10 +90,17 @@ class SignupFragment : Fragment() {
         return fragmentView
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
 
-        // TODO: Use the ViewModel
+    private fun onAlertDailog(view: View) {
+        var builder = AlertDialog.Builder(view.context)
+
+        builder.setMessage("Bilgileriniz başarıyla kaydedilmiştir.Email ve şifreniz ile giriş yapabilirsiniz")
+
+        builder.setPositiveButton("Tamam") { _, _ -> }
+
+        builder.show()
+
     }
+
 
 }
