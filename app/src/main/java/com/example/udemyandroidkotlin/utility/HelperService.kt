@@ -1,7 +1,9 @@
 package com.example.udemyandroidkotlin.utility
 
+
 import android.content.Context
 import com.example.udemyandroidkotlin.Exceptions.OfflineException
+
 import com.example.udemyandroidkotlin.R
 import com.example.udemyandroidkotlin.models.ApiError
 import com.example.udemyandroidkotlin.models.ApiResponse
@@ -28,15 +30,7 @@ class HelperService {
 
                 }
 
-                is Exception -> {
-                    val exmessage =
-                        arrayListOf(GlobalApp.getAppContext().resources.getString(R.string.ex_common_error))
-                    var apiError = ApiError(exmessage, 500, true)
 
-                    ApiResponse(false, fail = apiError)
-
-
-                }
                 else -> {
                     val exmessage =
                         arrayListOf(GlobalApp.getAppContext().resources.getString(R.string.ex_common_error))
