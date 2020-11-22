@@ -19,7 +19,7 @@ interface RetrofitLoginService {
     @FormUrlEncoded
     suspend fun signIn(
         @Field("client_id") clientId: String,
-        @Field("client_secrets") clientSecret: String,
+        @Field("client_secret") clientSecret: String,
         @Field("grant_type") grantType: String,
         @Field("username") userName: String,
         @Field("password") password: String
