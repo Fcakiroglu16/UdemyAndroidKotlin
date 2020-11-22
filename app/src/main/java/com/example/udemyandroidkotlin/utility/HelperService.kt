@@ -2,6 +2,7 @@ package com.example.udemyandroidkotlin.utility
 
 
 import android.content.Context
+import android.widget.Toast
 import com.example.udemyandroidkotlin.Exceptions.OfflineException
 
 import com.example.udemyandroidkotlin.R
@@ -75,6 +76,23 @@ class HelperService {
             return ApiResponse(false, null, apiError)
         }
 
+        fun showErrorMessageByToast(apiError: ApiError?) {
+
+            if (apiError == null) return
+            var errorBuilder = StringBuilder()
+
+            if (apiError.IsShow) {
+                for (error in apiError.Errors) {
+                    errorBuilder.append(error + "\n")
+                }
+
+            }
+
+            Toast.makeText(GlobalApp.getAppContext(), errorBuilder.toString(), Toast.LENGTH_LONG)
+                .show()
+
+
+        }
 
     }
 }

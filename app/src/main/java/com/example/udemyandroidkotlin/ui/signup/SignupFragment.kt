@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import androidx.viewpager2.widget.ViewPager2
 import com.example.udemyandroidkotlin.R
 import com.example.udemyandroidkotlin.models.UserSignUp
+import com.example.udemyandroidkotlin.utility.HelperService
 import com.example.udemyandroidkotlin.utility.LoadingState
 import kotlinx.android.synthetic.main.signup_fragment.*
 import kotlinx.android.synthetic.main.signup_fragment.view.*
@@ -36,6 +37,12 @@ class SignupFragment : Fragment() {
         var fragmentView = inflater.inflate(R.layout.signup_fragment, container, false)
         var viewPagerLogin = requireActivity().findViewById<ViewPager2>(R.id.ViewPagerLogin)
 
+
+        viewModel.errorState.observe(viewLifecycleOwner, {
+
+            HelperService.showErrorMessageByToast(it)
+
+        })
 
 
         viewModel.loadingSate.observe(viewLifecycleOwner, {
@@ -69,8 +76,6 @@ class SignupFragment : Fragment() {
                         delay(1000)
                         onAlertDailog(fragmentView)
                     }
-
-
 
 
                 } else {
