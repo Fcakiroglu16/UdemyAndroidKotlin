@@ -56,16 +56,8 @@ class LoginService {
                     userSignIn.Email,
                     userSignIn.Password
                 )
-
-
-
-
-
                 if (!response.isSuccessful) return HelperService.handleApiError(response)
-
-
                 var token = response.body() as TokenAPI
-
                 HelperService.saveTokenSharedPreference(token)
 
                 return ApiResponse(true)
