@@ -74,7 +74,7 @@ class TokenService {
 
             try {
                 var preference =
-                    GlobalApp.getAppContext().getSharedPreferences("ApiToken", Context.MODE_PRIVATE)
+                    GlobalApp.getAppContext().getSharedPreferences("token_api", Context.MODE_PRIVATE)
 
                 var tokenString: String? =
                     preference.getString("token", null) ?: return ApiResponse(false);

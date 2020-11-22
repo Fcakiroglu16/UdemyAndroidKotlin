@@ -20,7 +20,7 @@ interface RetrofitTokenService {
     ): Response<TokenAPI>
 
     @FormUrlEncoded
-    @POST("connect/token")
+    @POST("connect/introspect")
     suspend fun checkToken(
         @Field("token") token: String, @Header("Authorization") authorization: String
     ): Response<Introspec>
