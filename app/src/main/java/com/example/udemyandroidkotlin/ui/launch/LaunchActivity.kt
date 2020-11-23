@@ -46,10 +46,10 @@ class LaunchActivity : AppCompatActivity() {
         })
 
 
+        viewModel.tokenCheck()
 
 
-
-        viewModel.tokenCheck().observe(this, {
+        viewModel.isSuccessful.observe(this, {
 
 
             var intent = when (it) {

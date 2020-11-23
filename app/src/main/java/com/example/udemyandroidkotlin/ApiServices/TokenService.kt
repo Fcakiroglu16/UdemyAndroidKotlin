@@ -53,11 +53,12 @@ class TokenService {
                 var response = retrofitTokenServiceWithoutInterceptor.refreshToken(
                     BuildConfig.ClientId_ROP,
                     BuildConfig.Client_Secret_ROP,
-                    ApiConsts.resourceOwnerPasswordCredentialGrantType,
+                    ApiConsts.refreshTokenCredentialGrantType,
                     refreshToken
                 ).execute()
 
                 return if (response.isSuccessful) {
+
                     ApiResponse(true, response.body() as TokenAPI)
                 } else {
                     ApiResponse(false)
