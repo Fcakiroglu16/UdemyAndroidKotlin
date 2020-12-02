@@ -1,9 +1,11 @@
 package com.example.udemyandroidkotlin.Interceptors
 
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import com.example.udemyandroidkotlin.ApiServices.TokenService
 import com.example.udemyandroidkotlin.models.TokenAPI
+import com.example.udemyandroidkotlin.ui.login.LoginActivity
 import com.example.udemyandroidkotlin.utility.GlobalApp
 import com.example.udemyandroidkotlin.utility.HelperService
 import com.google.gson.Gson
@@ -54,7 +56,13 @@ class TokenInterceptor : Interceptor {
 
 
                 } else {
-                    //Login ekranına döndürülecek
+
+                    var intent= Intent(GlobalApp.getAppContext(),LoginActivity::class.java)
+
+                    intent.flags=Intent.FLAG_ACTIVITY_NEW_TASK
+
+                    GlobalApp.getAppContext().startActivity(intent)
+
                 }
 
             }
