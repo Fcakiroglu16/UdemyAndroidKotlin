@@ -6,7 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import com.example.udemyandroidkotlin.R
+import kotlinx.android.synthetic.main.product_list_fragment.view.*
 
 class ProductListFragment : Fragment() {
 
@@ -20,7 +22,18 @@ class ProductListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.product_list_fragment, container, false)
+        var root = inflater.inflate(R.layout.product_list_fragment, container, false)
+
+
+        root.btn_product_add.setOnClickListener {
+
+            it.findNavController().navigate(R.id.productAddFragmentNav)
+
+        }
+
+        return root
+
+
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
