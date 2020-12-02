@@ -8,9 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.navigation.findNavController
 import com.example.udemyandroidkotlin.R
 import com.example.udemyandroidkotlin.models.Category
 import com.example.udemyandroidkotlin.models.Product
+import com.example.udemyandroidkotlin.ui.user.UserActivity
 import com.example.udemyandroidkotlin.utility.GlobalApp
 import kotlinx.android.synthetic.main.product_add_fragment.*
 import kotlinx.android.synthetic.main.product_add_fragment.view.*
@@ -30,6 +32,9 @@ class ProductAddFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(ProductAddViewModel::class.java)
         var root = inflater.inflate(R.layout.product_add_fragment, container, false)
 
+
+        UserActivity.setLoadingStatus(viewModel, viewLifecycleOwner)
+        UserActivity.setErrorStatus(viewModel, viewLifecycleOwner)
 
         viewModel.getCategories().observe(viewLifecycleOwner, {
 
@@ -74,6 +79,8 @@ class ProductAddFragment : Fragment() {
 
                 if (it != null) {
                     Toast.makeText(activity, "Ürün Kaydedildi", Toast.LENGTH_LONG).show()
+
+                    root.findNavController().navigate(R.id.productListFragmentNav)
                 }
 
 

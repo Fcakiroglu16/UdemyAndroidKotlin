@@ -74,6 +74,7 @@ class ProductAddViewModel : ViewModel(), IViewModelState {
             }
 
 
+            loadingSate.value= LoadingState.Loaded
         }
 
 
