@@ -24,7 +24,7 @@ class PhotoService {
     companion object {
 
         private var retrofitPhotoServiceInterceptor =
-            ApiClient.buildService(ApiConsts.photoBaseUrl, RetrofitPhotoService::class.java, false)
+            ApiClient.buildService(ApiConsts.photoBaseUrl, RetrofitPhotoService::class.java, true)
 
 
         suspend fun uploadPhoto(fileUri: Uri): ApiResponse<Photo> {

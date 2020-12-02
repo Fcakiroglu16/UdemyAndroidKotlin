@@ -23,9 +23,10 @@
             android:padding="15dp">
 
             <ImageView
-                android:id="@+id/imageView3"
+                android:id="@+id/image_view_product_pick"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
                 android:src="@drawable/picture_add" />
 
             <com.google.android.material.textfield.TextInputLayout
