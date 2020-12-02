@@ -7,9 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import com.example.udemyandroidkotlin.R
 import com.example.udemyandroidkotlin.models.Category
+import com.example.udemyandroidkotlin.models.Product
 import com.example.udemyandroidkotlin.utility.GlobalApp
+import kotlinx.android.synthetic.main.product_add_fragment.*
 import kotlinx.android.synthetic.main.product_add_fragment.view.*
 
 class ProductAddFragment : Fragment() {
@@ -34,7 +37,7 @@ class ProductAddFragment : Fragment() {
                 GlobalApp.getAppContext(),
                 android.R.layout.simple_spinner_item,
                 it
-            ).also {categoryAdapter->
+            ).also { categoryAdapter ->
 
                 categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
@@ -46,6 +49,38 @@ class ProductAddFragment : Fragment() {
         })
 
 
+
+        root.btn_product_save.setOnClickListener {
+            //validation
+            var productName = root.txt_add_fragment_product_name.editText?.text.toString()
+            var productPrice = root.txt_add_fragment_product_price.editText?.text.toString()
+            var productStock = root.txt_add_fragment_product_stock.editText?.text.toString()
+            var productColor = root.txt_add_fragment_product_color.editText?.text.toString()
+
+            var category = spinner_add_fragment_categories.selectedItem as Category
+
+            var product = Product(
+                0,
+                productName,
+                productPrice.toDouble(),
+                productColor,
+                productStock.toInt(),
+                "",
+                category.Id, null
+            )
+
+            viewModel.addProduct(product, null).observe(viewLifecycleOwner, {
+
+
+                if (it != null) {
+                    Toast.makeText(activity, "Ürün Kaydedildi", Toast.LENGTH_LONG).show()
+                }
+
+
+            })
+
+
+        }
 
 
 

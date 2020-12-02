@@ -9,7 +9,8 @@ data class Product(
     @SerializedName("Color") var Color:String,
     @SerializedName("Stock") var Stock:Int,
     @SerializedName("PhotoPath") var PhotoPath:String,
-    @SerializedName("Category") var Category:Category
+    @SerializedName("Category_Id") var CategoryId:Int,
+    @SerializedName("Category") var Category:Category?
 
 ) {
 }
