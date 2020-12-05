@@ -48,7 +48,7 @@
             app:layout_constraintTop_toBottomOf="@+id/txt_recyclerview_product_name" />
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/txt_recylerview_product_category_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
