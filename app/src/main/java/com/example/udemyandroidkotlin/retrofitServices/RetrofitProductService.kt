@@ -9,7 +9,7 @@ interface RetrofitProductService {
 
 
     //  /odata/products?$expand=category($select=Name)&select=id,name,stock,price,photoPath&$orderby id desc&$skip=10
-    @GET("/odata/products?\$expand=category(\$select=Name)&\$select=id,name,stock,price,photoPath&\$orderby id desc")
+    @GET("/odata/products?\$expand=category(\$select=Name)&\$select=id,name,stock,price,photoPath&\$orderby=id desc")
     suspend fun products(@Query("\$skip") page: Int): Response<ODataModel<Product>>
 
 

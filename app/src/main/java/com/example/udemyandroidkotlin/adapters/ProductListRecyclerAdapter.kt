@@ -69,7 +69,7 @@ class ProductListRecyclerAdapter(
 
             val product_photo_url = "${ApiConsts.photoBaseUrl}/${product.PhotoPath}"
 
-            Picasso.get().load(product_photo_url).into(holder.imageProduct)
+            Picasso.get().load(product_photo_url).placeholder(R.drawable.no_image_available).error(R.drawable.no_image_available).into(holder.imageProduct)
 
 
         }
