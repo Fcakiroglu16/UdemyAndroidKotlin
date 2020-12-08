@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.udemyandroidkotlin.R
@@ -35,8 +36,8 @@ class ProductListFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(ProductListViewModel::class.java)
 
 
-        UserActivity.setLoadingStatus(viewModel,viewLifecycleOwner)
-        UserActivity.setErrorStatus(viewModel,viewLifecycleOwner)
+        UserActivity.setLoadingStatus(viewModel, viewLifecycleOwner)
+        UserActivity.setErrorStatus(viewModel, viewLifecycleOwner)
 
         root.btn_product_add.setOnClickListener {
 
@@ -68,6 +69,19 @@ class ProductListFragment : Fragment() {
                         productListRecyclerAdapter = ProductListRecyclerAdapter(it) { product ->
                             // Recyclerview içerisindeki bir item tıklandığından burası çalışacak
 
+
+                            var action =
+                                ProductListFragmentDirections.actionProductListFragmentToProductDetailFragment(
+                                    product.Id
+                                )
+
+                            var navHostFragment =
+                                requireActivity().supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+
+                            var navController = navHostFragment.navController
+
+
+                            navController.navigate(action)
 
                         }
 

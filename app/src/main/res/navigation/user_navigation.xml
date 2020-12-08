@@ -30,6 +30,9 @@
         <action
             android:id="@+id/action_productDetailFragment_to_productUpdateFragment"
             app:destination="@id/productUpdateFragmentNav" />
+        <argument
+            android:name="product_id"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/productUpdateFragmentNav"

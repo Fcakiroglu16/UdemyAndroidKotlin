@@ -74,6 +74,9 @@ dependencies {
 
     implementation 'com.squareup.picasso:picasso:2.71828'
 
+
+    apply plugin: "androidx.navigation.safeargs.kotlin"
+
     apply plugin: 'com.android.application'
     apply plugin: 'kotlin-android'
     apply plugin: 'kotlin-android-extensions'
