@@ -10,10 +10,10 @@
     <ImageView
         android:id="@+id/img_product_picture"
         android:layout_width="150dp"
-        android:layout_height="wrap_content"
+        android:layout_height="150dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
-        android:src="@drawable/ic_launcher_background"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
-        android:text="TextView"
+        android:text="ürün fiyat"
         app:layout_constraintStart_toEndOf="@+id/img_product_picture"
         app:layout_constraintTop_toBottomOf="@+id/txt_product_name" />
 
@@ -43,7 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
-        android:text="TextView"
+        android:text="ürün stok"
         app:layout_constraintStart_toEndOf="@+id/img_product_picture"
         app:layout_constraintTop_toBottomOf="@+id/txt_product_price" />
 
@@ -53,7 +53,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
-        android:text="TextView"
+        android:text="ürün renk"
         app:layout_constraintStart_toEndOf="@+id/img_product_picture"
         app:layout_constraintTop_toBottomOf="@+id/txt_product_stock" />
 
@@ -62,7 +62,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="TextView"
+        android:text="ürün kategori"
         app:layout_constraintStart_toStartOf="@+id/img_product_picture"
         app:layout_constraintTop_toBottomOf="@+id/img_product_picture" />
 
