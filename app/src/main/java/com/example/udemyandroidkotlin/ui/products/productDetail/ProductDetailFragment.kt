@@ -7,12 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.udemyandroidkotlin.R
 import com.example.udemyandroidkotlin.consts.ApiConsts
 import com.example.udemyandroidkotlin.models.Product
 import com.example.udemyandroidkotlin.ui.user.UserActivity
 import com.example.udemyandroidkotlin.utility.GlobalApp
+import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.product_detail_fragment.view.*
 
@@ -56,6 +58,26 @@ class ProductDetailFragment : Fragment() {
 
         viewModel.getProduct(arg.productId).observe(viewLifecycleOwner, p)
 
+
+        root.btn_product_delete.setOnClickListener {
+
+            viewModel.deleteProduct(arg.productId).observe(viewLifecycleOwner, {
+
+                if (it) {
+                    Snackbar.make(
+                        root,
+                        "Id'si ${arg.productId} olan ürün silinmiştir",
+                        Snackbar.LENGTH_LONG
+                    ).show()
+
+                    root.findNavController().navigate(R.id.productListFragmentNav)
+
+
+                }
+            })
+
+
+        }
 
         return root
     }

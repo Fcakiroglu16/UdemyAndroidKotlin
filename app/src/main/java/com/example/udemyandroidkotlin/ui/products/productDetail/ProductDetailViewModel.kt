@@ -37,4 +37,26 @@ class ProductDetailViewModel : ViewModel(), IViewModelState {
         return productReturn
 
     }
+
+    fun deleteProduct(productId: Int): LiveData<Boolean> {
+        var productReturn = MutableLiveData<Boolean>()
+
+        loadingSate.value = LoadingState.Loading
+
+        viewModelScope.launch {
+
+            var response = ProductService.deleteProduct(productId)
+
+            if (response.isSuccessful) {
+                productReturn.value = true
+
+            } else {
+                errorState.value = response.fail
+            }
+            loadingSate.value = LoadingState.Loaded
+
+        }
+        return productReturn
+
+    }
 }
