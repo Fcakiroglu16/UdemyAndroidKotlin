@@ -26,7 +26,7 @@ class ProductDetailFragment : Fragment() {
     }
 
     private lateinit var viewModel: ProductDetailViewModel
-
+    private lateinit var product: Product
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,6 +41,7 @@ class ProductDetailFragment : Fragment() {
 
             if (it != null) {
 
+                product = it!!
                 root.txt_product_name.text = it.Name
                 root.txt_product_color.text = it.Color
                 root.txt_product_price.text = it.Price.toString()
@@ -78,6 +79,20 @@ class ProductDetailFragment : Fragment() {
 
 
         }
+
+
+        root.btn_product_update.setOnClickListener {
+
+            var action =
+                ProductDetailFragmentDirections.actionProductDetailFragmentToProductUpdateFragment(
+                    product
+                )
+
+            root.findNavController().navigate(action)
+
+
+        }
+
 
         return root
     }

@@ -1,7 +1,10 @@
 package com.example.udemyandroidkotlin.models
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class Product(
     @SerializedName("Id") var Id:Int,
     @SerializedName("Name") var Name:String,
@@ -12,8 +15,7 @@ data class Product(
     @SerializedName("Category_Id") var CategoryId:Int,
     @SerializedName("Category") var Category:Category?
 
-) {
-}
+) : Parcelable
 
 /*
 "Id": 3,
